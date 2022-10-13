@@ -49,7 +49,7 @@ public class Comment extends WeiboResponse {
 		idstr = json.getString("idstr");
 		text = json.getString("text");
 		source = json.getString("source");
-		createdAt = parseDate(json.getString("created_at"), "EEE MMM dd HH:mm:ss z yyyy");
+//		createdAt = parseDate(json.getString("created_at"), "EEE MMM dd HH:mm:ss z yyyy");
 		if(!json.isNull("user"))
 			user = new User(json.getJSONObject("user"));
 		if(!json.isNull("status"))

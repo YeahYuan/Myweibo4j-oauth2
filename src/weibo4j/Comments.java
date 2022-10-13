@@ -59,7 +59,7 @@ public class Comments extends Weibo {
 	public CommentWapper getCommentById(String id, Paging page,
 			Integer filter_by_author) throws WeiboException {
 		return Comment.constructWapperComments(client.get(
-				WeiboConfig.getValue("baseURL") + "comments/show.json",
+				WeiboConfig.getValue("baseURL") + "comments/show",
 				new PostParameter[] {
 						new PostParameter("id", id),
 						new PostParameter("filter_by_author", filter_by_author

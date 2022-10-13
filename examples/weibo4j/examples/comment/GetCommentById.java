@@ -23,7 +23,8 @@ public class GetCommentById {
 
 	public static void main(String[] args) throws InterruptedException, WeiboException {
 //		queryByOther();
-		queryByUrl();
+//		queryByUrl();
+		query();
 	}
 
 	public static void queryByUrl() throws WeiboException {
@@ -94,7 +95,7 @@ public class GetCommentById {
 
 	public static  void query() {
 		String access_token = WeiboConfig.getValue("access_token");
-		String id = "4823844303667720";
+		String id = "4824050016980800";
 		Comments cm = new Comments(access_token);
 		try {
 			int page = 1;
@@ -104,14 +105,14 @@ public class GetCommentById {
 			System.out.println("共计" + commentWapper.getTotalNumber() + "条");
 			System.out.println("第" + page + "页," + commentWapper.getComments().size() + "条");
 			for (Comment com : commentWapper.getComments()) {
-				System.out.println(++count + "\t" + com.getUser().getScreenName() + "\t" + com.getText());
+				System.out.println(++count + "\t" + com.getId() + "\t" + com.getCreatedAt() + "\t" + com.getUser().getScreenName() + "\t" + com.getText());
 			}
 			for (page++; page <= pages; page ++) {
 				Thread.sleep(1000);
 				commentWapper = cm.getCommentById(id, new Paging(page, pageSize), 0);
 				System.out.println("第" + page + "页," + commentWapper.getComments().size() + "条");
 				for (Comment com : commentWapper.getComments()) {
-					System.out.println(++count + "\t" + com.getUser().getScreenName() + "\t" + com.getText());
+					System.out.println(++count + "\t" + com.getId() + "\t" + com.getCreatedAt() + "\t" + com.getUser().getScreenName() + "\t" + com.getText());
 				}
 			}
 		} catch (WeiboException e) {

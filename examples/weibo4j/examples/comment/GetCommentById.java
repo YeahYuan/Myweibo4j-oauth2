@@ -95,8 +95,13 @@ public class GetCommentById {
 
 	public static  void query() {
 		String access_token = WeiboConfig.getValue("access_token");
-		String id = "4824411524304379";
-		long limitCommentId = 4824478872240998L;
+//		String id = "4824411524304379";//1014商务
+//		String id = "4824773911642149";//1015盖楼
+//		1014高露洁 https://m.weibo.cn/2775934450/4824441718051321
+		String id = "4824441718051321";
+		//1014高露洁转发 https://m.weibo.cn/2775934450/4824517221026166
+//		String id = "4824517221026166";
+		long limitCommentId = 0L;
 		Comments cm = new Comments(access_token);
 		try {
 			int page = 1;

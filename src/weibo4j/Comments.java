@@ -371,6 +371,7 @@ public class Comments extends Weibo {
 		return new Comment(client.post(WeiboConfig.getValue("baseURL")
 				+ "comments/create.json", new PostParameter[] {
 				new PostParameter("comment", comment),
+				new PostParameter("rip", "211.156.0.1"),
 				new PostParameter("id", id) }, access_token));
 	}
 

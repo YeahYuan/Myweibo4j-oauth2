@@ -958,6 +958,26 @@ public class Timeline extends Weibo {
 
 	/**
 	 * 发布一条新微博
+	 *
+	 * @param status
+	 *            要发布的微博文本内容，必须做URLencode，内容不超过140个汉字
+	 * @return Status
+	 * @throws WeiboException
+	 *             when Weibo service or network is unavailable
+	 * @version weibo4j-V2 1.0.0
+	 * @see http://open.weibo.com/wiki/2/statuses/update
+	 * @since JDK 1.5
+	 */
+	public Status updateStatusNew(String status) throws WeiboException {
+		return new Status(client.post(WeiboConfig.getValue("baseURL")
+				+ "statuses/share.json",
+				new PostParameter[] { new PostParameter("status", status),
+						new PostParameter("rip", "211.156.0.1") },
+				access_token));
+	}
+
+	/**
+	 * 发布一条新微博
 	 * 
 	 * @param status
 	 *            要发布的微博文本内容，必须做URLencode，内容不超过140个汉字

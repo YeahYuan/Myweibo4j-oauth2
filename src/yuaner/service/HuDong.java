@@ -18,6 +18,49 @@ public class HuDong {
 
     public static void commentForFollowWeibo() throws WeiboException, InterruptedException {
         Timeline tm = new Timeline(ACCESS_TOKEN);
+        long limitWeiboId = 4827038030233609L;
+        int count = 1;
+        while (true) {
+            long maxWeiboId = limitWeiboId;
+            StatusWapper statusWapper = tm.getHomeTimeline();
+            System.out.println("TotalNumber:" + statusWapper.getTotalNumber());
+            System.out.println("Statuses size:" + statusWapper.getStatuses().size());
+            for (Status status : statusWapper.getStatuses()) {
+                String weiboIdStr = status.getId();
+                long weiboId = Long.parseLong(weiboIdStr);
+                maxWeiboId = Math.max(maxWeiboId, weiboId);
+                if (weiboId <= limitWeiboId) {
+                    limitWeiboId = maxWeiboId;
+                    break;
+                }
+                printWeibo(count, status);
+                comment(weiboIdStr);
+                if (count % 5 == 0) {
+                    Thread.sleep(1000 * 60 * 15);
+                } else {
+                    Thread.sleep(1000 * 60);
+                }
+                count++;
+                Status retweetedStatus = status.getRetweetedStatus();
+                if (Objects.nonNull(retweetedStatus)) {
+                    printWeibo(count, retweetedStatus);
+                    weiboIdStr = retweetedStatus.getId();
+                    comment(weiboIdStr);
+                    if (count % 5 == 0) {
+                        Thread.sleep(1000 * 60 * 15);
+                    } else {
+                        Thread.sleep(1000 * 60);
+                    }
+                    count++;
+                }
+            }
+            Thread.sleep(1000 * 60 * 5);
+        }
+
+    }
+
+    public static void commentForUserWeibo(String userId) throws WeiboException, InterruptedException {
+        Timeline tm = new Timeline(ACCESS_TOKEN);
         StatusWapper statusWapper = tm.getHomeTimeline();
         System.out.println("TotalNumber:" + statusWapper.getTotalNumber());
         System.out.println("Statuses size:" + statusWapper.getStatuses().size());

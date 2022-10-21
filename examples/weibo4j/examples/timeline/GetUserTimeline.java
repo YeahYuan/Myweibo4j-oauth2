@@ -10,9 +10,10 @@ public class GetUserTimeline {
 
 	public static void main(String[] args) {
 		String access_token = WeiboConfig.getValue("access_token");
+		String uid = "1748405443";//素素
 		Timeline tm = new Timeline(access_token);
 		try {
-			StatusWapper status = tm.getUserTimeline();
+			StatusWapper status = tm.getUserTimelineByUid(uid);
 			Log.logInfo(status.toString());
 		} catch (WeiboException e) {
 			e.printStackTrace();

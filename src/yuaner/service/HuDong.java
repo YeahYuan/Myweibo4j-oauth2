@@ -8,13 +8,18 @@ import weibo4j.model.Status;
 import weibo4j.model.StatusWapper;
 import weibo4j.model.WeiboException;
 import yuaner.consts.CommentBank;
+import yuaner.consts.TokenBank;
 
 import java.util.Objects;
 
+import static yuaner.consts.CommentBank.getOneComment;
+import static yuaner.consts.CommentBank.getOtherComment;
 import static yuaner.consts.CommonConst.ACCESS_TOKEN;
 import static yuaner.consts.CommonConst.TAIL;
 
 public class HuDong {
+
+    private static String previousComment = null;
 
     public static void commentForFollowWeibo() throws WeiboException, InterruptedException {
         Timeline tm = new Timeline(ACCESS_TOKEN);
@@ -90,12 +95,47 @@ public class HuDong {
         }
 
     }
+    public static void comments() throws InterruptedException {
+        String weiboId = "4828050502718748";
+        String token = null;
+        for (int j = 0; j < 10; j++) {
+            token = TokenBank.getNextToken(token);
+            for (int i = 0; i < 9; i++) {
+                comment(weiboId, token, CommentBank.TYPE_CAI_HONG);
+                System.out.println("【count】" + (i + 1));
+                Thread.sleep(1000 * 65);
+            }
+            Thread.sleep(1000 * 60 * 5);
+        }
+    }
 
     public static void comment(String weiboId) {
-        String comments = CommentBank.getOneComment() + TAIL;
+        String comments = getOneComment() + TAIL;
         Comments cm = new Comments(ACCESS_TOKEN);
         try {
             cm.createComment(comments, weiboId);
+        } catch (WeiboException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void comment(String weiboId, String token) {
+        String comments = getOneComment() + TAIL;
+        Comments cm = new Comments(token);
+        try {
+            cm.createComment(comments, weiboId);
+        } catch (WeiboException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void comment(String weiboId, String token, String commentType) {
+        previousComment = getOtherComment(commentType, HuDong.previousComment);
+        String comments = previousComment + TAIL;
+        Comments cm = new Comments(token);
+        try {
+            cm.createComment(comments, weiboId);
+            System.out.println(previousComment);
         } catch (WeiboException e) {
             e.printStackTrace();
         }
@@ -106,6 +146,8 @@ public class HuDong {
     }
 
     public static void main(String[] args) throws WeiboException, InterruptedException {
-        commentForFollowWeibo();
+//        commentForFollowWeibo();
+//        comments();
+        comment("4828171289759705", "2.002n_ooBqwBsbD0fe55780b5p_ixJD", CommentBank.TYPE_CAI_HONG);
     }
 }

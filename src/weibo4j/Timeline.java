@@ -199,7 +199,10 @@ public class Timeline extends Weibo {
 		return Status
 				.constructWapperStatus(client.get(
 						WeiboConfig.getValue("baseURL")
-								+ "statuses/home_timeline.json", access_token));
+								+ "statuses/home_timeline.json",
+						new PostParameter[] {
+								new PostParameter("count", "100") },
+						access_token));
 
 	}
 

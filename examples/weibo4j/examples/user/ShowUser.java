@@ -10,7 +10,7 @@ public class ShowUser {
 
 	public static void main(String[] args) {
 		String access_token = WeiboConfig.getValue("access_token");
-		String uid = "2419941665";
+		String uid = "6201040390";
 		Users um = new Users(access_token);
 		try {
 			User user = um.showUserById(uid);

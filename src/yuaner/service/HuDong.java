@@ -23,7 +23,7 @@ public class HuDong {
 
     public static void commentForFollowWeibo() throws WeiboException, InterruptedException {
         Timeline tm = new Timeline(ACCESS_TOKEN);
-        long limitWeiboId = 4827038030233609L;
+        long limitWeiboId = 4827796285430562L;
         int count = 1;
         while (true) {
             long maxWeiboId = limitWeiboId;
@@ -47,7 +47,7 @@ public class HuDong {
                 }
                 count++;
                 Status retweetedStatus = status.getRetweetedStatus();
-                if (Objects.nonNull(retweetedStatus)) {
+                if (Objects.nonNull(retweetedStatus) && status.getUser().getId().equals("6201040390")) {
                     printWeibo(count, retweetedStatus);
                     weiboIdStr = retweetedStatus.getId();
                     comment(weiboIdStr);
@@ -148,6 +148,6 @@ public class HuDong {
     public static void main(String[] args) throws WeiboException, InterruptedException {
 //        commentForFollowWeibo();
 //        comments();
-        comment("4828171289759705", "2.002n_ooBqwBsbD0fe55780b5p_ixJD", CommentBank.TYPE_CAI_HONG);
+        comment("4828171289759705", "2.00uZfLmDqwBsbD7fd5c6d637BCroOC", CommentBank.TYPE_CAI_HONG);
     }
 }

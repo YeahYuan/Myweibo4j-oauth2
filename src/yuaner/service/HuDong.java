@@ -2,8 +2,6 @@ package yuaner.service;
 
 import weibo4j.Comments;
 import weibo4j.Timeline;
-import weibo4j.examples.oauth2.Log;
-import weibo4j.model.Comment;
 import weibo4j.model.Status;
 import weibo4j.model.StatusWapper;
 import weibo4j.model.WeiboException;
@@ -12,8 +10,7 @@ import yuaner.consts.TokenBank;
 
 import java.util.Objects;
 
-import static yuaner.consts.CommentBank.getOneComment;
-import static yuaner.consts.CommentBank.getOtherComment;
+import static yuaner.consts.CommentBank.getComment;
 import static yuaner.consts.CommonConst.ACCESS_TOKEN;
 import static yuaner.consts.CommonConst.TAIL;
 
@@ -96,21 +93,21 @@ public class HuDong {
 
     }
     public static void comments() throws InterruptedException {
-        String weiboId = "4828050502718748";
+        String weiboId = "4828110900170443";
         String token = null;
-        for (int j = 0; j < 10; j++) {
+        for (int j = 0; j < 30; j++) {
             token = TokenBank.getNextToken(token);
-            for (int i = 0; i < 9; i++) {
-                comment(weiboId, token, CommentBank.TYPE_CAI_HONG);
+            for (int i = 0; i < 5; i++) {
+                commentWithoutTail(weiboId, token, CommentBank.TYPE_CAI_HONG);
                 System.out.println("【count】" + (i + 1));
-                Thread.sleep(1000 * 65);
+                Thread.sleep(1000 * 90);
             }
-            Thread.sleep(1000 * 60 * 5);
+            Thread.sleep(1000 * 60 * 10);
         }
     }
 
     public static void comment(String weiboId) {
-        String comments = getOneComment() + TAIL;
+        String comments = getComment() + TAIL;
         Comments cm = new Comments(ACCESS_TOKEN);
         try {
             cm.createComment(comments, weiboId);
@@ -120,7 +117,7 @@ public class HuDong {
     }
 
     public static void comment(String weiboId, String token) {
-        String comments = getOneComment() + TAIL;
+        String comments = getComment() + TAIL;
         Comments cm = new Comments(token);
         try {
             cm.createComment(comments, weiboId);
@@ -130,12 +127,21 @@ public class HuDong {
     }
 
     public static void comment(String weiboId, String token, String commentType) {
-        previousComment = getOtherComment(commentType, HuDong.previousComment);
-        String comments = previousComment + TAIL;
+        String comments = getComment(commentType) + TAIL;
         Comments cm = new Comments(token);
         try {
             cm.createComment(comments, weiboId);
-            System.out.println(previousComment);
+            System.out.println(comments);
+        } catch (WeiboException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void commentWithoutTail(String weiboId, String token, String commentType) {
+        String comments = getComment(commentType);
+        Comments cm = new Comments(token);
+        try {
+            cm.createComment(comments, weiboId);
+            System.out.println(comments);
         } catch (WeiboException e) {
             e.printStackTrace();
         }
@@ -148,6 +154,13 @@ public class HuDong {
     public static void main(String[] args) throws WeiboException, InterruptedException {
 //        commentForFollowWeibo();
 //        comments();
-        comment("4828171289759705", "2.00uZfLmDqwBsbD7fd5c6d637BCroOC", CommentBank.TYPE_CAI_HONG);
+//        tokenList.add("2.00L4pldCqwBsbD4399cde4cfRhl69B");//解释
+//        tokenList.add("2.00VaIcVIqwBsbDe84a28d90cfTOMcD");//机器人
+//        tokenList.add("2.00uZfLmDqwBsbD7fd5c6d637BCroOC");//奶茶
+//        tokenList.add("2.002n_ooBqwBsbD0fe55780b5p_ixJD");//恋爱
+//        commentWithoutTail("4828110900170443", "2.00L4pldCqwBsbD4399cde4cfRhl69B", CommentBank.TYPE_CAI_HONG);
+        commentWithoutTail("4828110900170443", "2.00uZfLmDqwBsbD7fd5c6d637BCroOC", CommentBank.TYPE_CAI_HONG);
+//        commentWithoutTail("4828110900170443", "2.00VaIcVIqwBsbDe84a28d90cfTOMcD", CommentBank.TYPE_CAI_HONG);
+        commentWithoutTail("4828110900170443", "2.002n_ooBqwBsbD0fe55780b5p_ixJD", CommentBank.TYPE_CAI_HONG);
     }
 }

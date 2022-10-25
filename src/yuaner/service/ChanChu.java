@@ -59,7 +59,7 @@ public class ChanChu {
     }
 
     public static void comment(String weiboId) {
-        String comments = CommentBank.getOneComment() + TAIL;
+        String comments = CommentBank.getComment() + TAIL;
         Comments cm = new Comments(ACCESS_TOKEN);
         try {
             cm.createComment(comments, weiboId);

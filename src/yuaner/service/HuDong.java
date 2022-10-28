@@ -8,7 +8,9 @@ import weibo4j.model.WeiboException;
 import yuaner.consts.CommentBank;
 import yuaner.consts.TokenBank;
 
+import java.util.LinkedList;
 import java.util.Objects;
+import java.util.Queue;
 
 import static yuaner.consts.CommentBank.getComment;
 import static yuaner.consts.CommonConst.ACCESS_TOKEN;
@@ -17,6 +19,12 @@ import static yuaner.consts.CommonConst.TAIL;
 public class HuDong {
 
     private static String previousComment = null;
+    private static Queue<String> weiboQueue = new LinkedList<>();
+
+    static {
+        weiboQueue.offer("4828549149885373");
+        weiboQueue.offer("4828660090011744");
+    }
 
     public static void commentForFollowWeibo() throws WeiboException, InterruptedException {
         Timeline tm = new Timeline(ACCESS_TOKEN);
@@ -93,16 +101,19 @@ public class HuDong {
 
     }
     public static void comments() throws InterruptedException {
-        String weiboId = "4828110900170443";
-        String token = null;
+        int count = 1;
         for (int j = 0; j < 30; j++) {
-            token = TokenBank.getNextToken(token);
+            TokenBank.UserToken userToken = TokenBank.getNextToken();
+            String token = userToken.getToken();
             for (int i = 0; i < 5; i++) {
+                String weiboId = weiboQueue.poll();
+                weiboQueue.offer(weiboId);
                 commentWithoutTail(weiboId, token, CommentBank.TYPE_CAI_HONG);
-                System.out.println("【count】" + (i + 1));
-                Thread.sleep(1000 * 90);
+                userToken.setCommentCount(userToken.getCommentCount() + 1);
+                System.out.println("【total_count】" + count++ + ", "  + userToken.getUsername() + "【count】" + userToken.getCommentCount());
+                Thread.sleep(1000 * 70);
             }
-            Thread.sleep(1000 * 60 * 10);
+//            Thread.sleep(1000 * 60 * 10);
         }
     }
 
@@ -158,9 +169,9 @@ public class HuDong {
 //        tokenList.add("2.00VaIcVIqwBsbDe84a28d90cfTOMcD");//机器人
 //        tokenList.add("2.00uZfLmDqwBsbD7fd5c6d637BCroOC");//奶茶
 //        tokenList.add("2.002n_ooBqwBsbD0fe55780b5p_ixJD");//恋爱
-//        commentWithoutTail("4828110900170443", "2.00L4pldCqwBsbD4399cde4cfRhl69B", CommentBank.TYPE_CAI_HONG);
+        commentWithoutTail("4828110900170443", "2.00L4pldCqwBsbD4399cde4cfRhl69B", CommentBank.TYPE_CAI_HONG);
         commentWithoutTail("4828110900170443", "2.00uZfLmDqwBsbD7fd5c6d637BCroOC", CommentBank.TYPE_CAI_HONG);
-//        commentWithoutTail("4828110900170443", "2.00VaIcVIqwBsbDe84a28d90cfTOMcD", CommentBank.TYPE_CAI_HONG);
+        commentWithoutTail("4828110900170443", "2.00VaIcVIqwBsbDe84a28d90cfTOMcD", CommentBank.TYPE_CAI_HONG);
         commentWithoutTail("4828110900170443", "2.002n_ooBqwBsbD0fe55780b5p_ixJD", CommentBank.TYPE_CAI_HONG);
     }
 }

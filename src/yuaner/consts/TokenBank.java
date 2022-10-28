@@ -10,8 +10,8 @@ public class TokenBank {
 
     static {
         tokenList.add("2.00uZfLmDqwBsbD7fd5c6d637BCroOC");//奶茶
-//        tokenList.add("2.00L4pldCqwBsbD4399cde4cfRhl69B");//解释
-//        tokenList.add("2.00VaIcVIqwBsbDe84a28d90cfTOMcD");//机器人
+        tokenList.add("2.00L4pldCqwBsbD4399cde4cfRhl69B");//解释
+        tokenList.add("2.00VaIcVIqwBsbDe84a28d90cfTOMcD");//机器人
         tokenList.add("2.002n_ooBqwBsbD0fe55780b5p_ixJD");//恋爱
 
         tokenQueue.offer(new UserToken("AS_喝不完一杯奶茶", "2.00uZfLmDqwBsbD7fd5c6d637BCroOC", 0));

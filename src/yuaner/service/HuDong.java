@@ -22,8 +22,7 @@ public class HuDong {
     private static Queue<String> weiboQueue = new LinkedList<>();
 
     static {
-        weiboQueue.offer("4828549149885373");
-        weiboQueue.offer("4828660090011744");
+        weiboQueue.offer("4831742311013096");
     }
 
     public static void commentForFollowWeibo() throws WeiboException, InterruptedException {
@@ -113,7 +112,7 @@ public class HuDong {
                 System.out.println("【total_count】" + count++ + ", "  + userToken.getUsername() + "【count】" + userToken.getCommentCount());
                 Thread.sleep(1000 * 70);
             }
-//            Thread.sleep(1000 * 60 * 10);
+            Thread.sleep(1000 * 60 * 10);
         }
     }
 
@@ -164,14 +163,14 @@ public class HuDong {
 
     public static void main(String[] args) throws WeiboException, InterruptedException {
 //        commentForFollowWeibo();
-//        comments();
+        comments();
 //        tokenList.add("2.00L4pldCqwBsbD4399cde4cfRhl69B");//解释
 //        tokenList.add("2.00VaIcVIqwBsbDe84a28d90cfTOMcD");//机器人
 //        tokenList.add("2.00uZfLmDqwBsbD7fd5c6d637BCroOC");//奶茶
 //        tokenList.add("2.002n_ooBqwBsbD0fe55780b5p_ixJD");//恋爱
-        commentWithoutTail("4828110900170443", "2.00L4pldCqwBsbD4399cde4cfRhl69B", CommentBank.TYPE_CAI_HONG);
-        commentWithoutTail("4828110900170443", "2.00uZfLmDqwBsbD7fd5c6d637BCroOC", CommentBank.TYPE_CAI_HONG);
-        commentWithoutTail("4828110900170443", "2.00VaIcVIqwBsbDe84a28d90cfTOMcD", CommentBank.TYPE_CAI_HONG);
-        commentWithoutTail("4828110900170443", "2.002n_ooBqwBsbD0fe55780b5p_ixJD", CommentBank.TYPE_CAI_HONG);
+//        commentWithoutTail("4828110900170443", "2.00L4pldCqwBsbD4399cde4cfRhl69B", CommentBank.TYPE_CAI_HONG);
+//        commentWithoutTail("4828110900170443", "2.00uZfLmDqwBsbD7fd5c6d637BCroOC", CommentBank.TYPE_CAI_HONG);
+//        commentWithoutTail("4828110900170443", "2.00VaIcVIqwBsbDe84a28d90cfTOMcD", CommentBank.TYPE_CAI_HONG);
+//        commentWithoutTail("4828110900170443", "2.002n_ooBqwBsbD0fe55780b5p_ixJD", CommentBank.TYPE_CAI_HONG);
     }
 }

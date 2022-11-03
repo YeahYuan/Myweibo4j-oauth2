@@ -9,20 +9,20 @@ public class TokenBank {
     public static List<String> tokenList = new ArrayList();
 
     static {
-        tokenList.add("2.00uZfLmDqwBsbD7fd5c6d637BCroOC");//奶茶
+//        tokenList.add("2.00uZfLmDqwBsbD7fd5c6d637BCroOC");//奶茶
         tokenList.add("2.00L4pldCqwBsbD4399cde4cfRhl69B");//解释
         tokenList.add("2.00VaIcVIqwBsbDe84a28d90cfTOMcD");//机器人
-        tokenList.add("2.002n_ooBqwBsbD0fe55780b5p_ixJD");//恋爱
+        tokenList.add("2.002n_ooBqwBsbD3d55a5eb090sl6Ap");//恋爱
 
-        tokenQueue.offer(new UserToken("AS_喝不完一杯奶茶", "2.00uZfLmDqwBsbD7fd5c6d637BCroOC", 0));
-        tokenQueue.offer(new UserToken("汽水牌机器人", "2.00VaIcVIqwBsbDe84a28d90cfTOMcD", 0));
+//        tokenQueue.offer(new UserToken("AS_喝不完一杯奶茶", "2.00uZfLmDqwBsbD7fd5c6d637BCroOC", 0));
+//        tokenQueue.offer(new UserToken("汽水牌机器人", "2.00VaIcVIqwBsbDe84a28d90cfTOMcD", 0));
         tokenQueue.offer(new UserToken("你一定要听我解释", "2.00L4pldCqwBsbD4399cde4cfRhl69B", 0));
-        tokenQueue.offer(new UserToken("檀个小小恋爱", "2.002n_ooBqwBsbD0fe55780b5p_ixJD", 0));
+        tokenQueue.offer(new UserToken("檀个小小恋爱", "2.002n_ooBqwBsbD3d55a5eb090sl6Ap", 0));
 
         tokenMap.put("AS_喝不完一杯奶茶", "2.00uZfLmDqwBsbD7fd5c6d637BCroOC");
         tokenMap.put("汽水牌机器人", "2.00VaIcVIqwBsbDe84a28d90cfTOMcD");
         tokenMap.put("你一定要听我解释", "2.00L4pldCqwBsbD4399cde4cfRhl69B");
-        tokenMap.put("檀个小小恋爱", "2.002n_ooBqwBsbD0fe55780b5p_ixJD");
+        tokenMap.put("檀个小小恋爱", "2.002n_ooBqwBsbD3d55a5eb090sl6Ap");
     }
 
     public static UserToken getNextToken() {

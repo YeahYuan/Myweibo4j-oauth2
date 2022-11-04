@@ -7,6 +7,7 @@ public class CommentBank {
     public static final String TYPE_COMMON = "common";
     public static final String TYPE_CAI_HONG = "cauhong";
     public static final Map<String, Queue<String>> commentMap;
+    public static final Map<String, String> keyMap;
 
      static {
          commentMap = new HashMap<>();
@@ -40,6 +41,30 @@ public class CommentBank {
          caiHongQueue.offer("以前喜欢满天的星星，现在喜欢看月亮。还很喜欢万物都静下来的夜晚，像一个无声的怀抱，更喜欢苏醒");
          caiHongQueue.offer("我想我要因为以危险方法危害公共安全被抓走了。因为一看见苏醒，我就心动到方圆十里都在地震。");
          commentMap.put(TYPE_CAI_HONG, caiHongQueue);
+
+         keyMap = new LinkedHashMap<>();
+         keyMap.put("醒年今日", "考古");
+         keyMap.put("特刊", "特刊");
+         keyMap.put("repo", "repo");
+         keyMap.put("录屏", "录屏");
+         keyMap.put("cut", "CUT");
+         keyMap.put("CUT", "CUT");
+         keyMap.put("截修", "截修");
+         keyMap.put("饭绘", "产出");
+         keyMap.put("混剪", "剪辑");
+         keyMap.put("视频", "剪辑");
+         keyMap.put("上班", "上班");
+         keyMap.put("下班", "下班");
+         keyMap.put("壁纸", "壁纸");
+         keyMap.put("汇总", "整理");
+         keyMap.put("整理", "整理");
+         keyMap.put("总结", "整理");
+         keyMap.put("打卡", "打卡");
+         keyMap.put("应援", "应援");
+         keyMap.put("饭制", "产出");
+         keyMap.put("醒动信号", "日报");
+         keyMap.put("考古", "考古");
+         keyMap.put("路透", "路透");
      }
 
      public static String getComment() {
@@ -53,19 +78,17 @@ public class CommentBank {
          return comment;
      }
 
+     public static String getKeyComment(String text) {
+         for (String key : keyMap.keySet()) {
+             if (text.contains(key)) {
+                 return "谢谢你，" + keyMap.get(key) + "侠[送花花]";
+             }
+         }
+         return null;
+     }
+
     public static void main(String[] args) {
         System.out.println(getComment(TYPE_CAI_HONG));
-        System.out.println(getComment(TYPE_CAI_HONG));
-        System.out.println(getComment(TYPE_CAI_HONG));
-        System.out.println(getComment(TYPE_CAI_HONG));
-        System.out.println(getComment(TYPE_CAI_HONG));
-        System.out.println(getComment(TYPE_CAI_HONG));
-        System.out.println(getComment(TYPE_CAI_HONG));
-        System.out.println(getComment(TYPE_CAI_HONG));
-        System.out.println(getComment(TYPE_CAI_HONG));
-        System.out.println(getComment(TYPE_CAI_HONG));
-        System.out.println(getComment(TYPE_CAI_HONG));
-        System.out.println(getComment(TYPE_CAI_HONG));
-        System.out.println(getComment(TYPE_CAI_HONG));
+        System.out.println(getKeyComment("20221104【醒动信号】【repo】@苏醒AllenSu"));
     }
 }

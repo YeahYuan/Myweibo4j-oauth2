@@ -13,6 +13,7 @@ import java.util.Objects;
 import java.util.Queue;
 
 import static yuaner.consts.CommentBank.getComment;
+import static yuaner.consts.CommentBank.getKeyComment;
 import static yuaner.consts.CommonConst.ACCESS_TOKEN;
 import static yuaner.consts.CommonConst.TAIL;
 
@@ -29,7 +30,7 @@ public class HuDong {
         Timeline tm = new Timeline(ACCESS_TOKEN);
         long limitWeiboId = 4827796285430562L;
         int count = 1;
-        while (true) {
+        while (count <= 50) {
             long maxWeiboId = limitWeiboId;
             StatusWapper statusWapper = tm.getHomeTimeline();
             System.out.println("TotalNumber:" + statusWapper.getTotalNumber());
@@ -42,6 +43,10 @@ public class HuDong {
                     limitWeiboId = maxWeiboId;
                     break;
                 }
+                if (status.getUser().getId().equals("2461615292")) {
+                    //发电站
+                    continue;
+                }
                 printWeibo(count, status);
                 comment(weiboIdStr);
                 if (count % 5 == 0) {
@@ -52,9 +57,10 @@ public class HuDong {
                 count++;
                 Status retweetedStatus = status.getRetweetedStatus();
                 if (Objects.nonNull(retweetedStatus) && status.getUser().getId().equals("6201040390")) {
+                    //吸猫现场转发
                     printWeibo(count, retweetedStatus);
                     weiboIdStr = retweetedStatus.getId();
-                    comment(weiboIdStr);
+                    commentForXiMaoZhuan(status.getText(), weiboIdStr);
                     if (count % 5 == 0) {
                         Thread.sleep(1000 * 60 * 15);
                     } else {
@@ -99,25 +105,24 @@ public class HuDong {
         }
 
     }
-    public static void comments() throws InterruptedException {
-        int count = 1;
-        for (int j = 0; j < 30; j++) {
-            TokenBank.UserToken userToken = TokenBank.getNextToken();
-            String token = userToken.getToken();
-            for (int i = 0; i < 5; i++) {
-                String weiboId = weiboQueue.poll();
-                weiboQueue.offer(weiboId);
-                commentWithoutTail(weiboId, token, CommentBank.TYPE_CAI_HONG);
-                userToken.setCommentCount(userToken.getCommentCount() + 1);
-                System.out.println("【total_count】" + count++ + ", "  + userToken.getUsername() + "【count】" + userToken.getCommentCount());
-                Thread.sleep(1000 * 70);
-            }
-            Thread.sleep(1000 * 60 * 10);
-        }
-    }
 
     public static void comment(String weiboId) {
         String comments = getComment() + TAIL;
+        Comments cm = new Comments(ACCESS_TOKEN);
+        try {
+            cm.createComment(comments, weiboId);
+        } catch (WeiboException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void commentForXiMaoZhuan(String text, String weiboId) {
+        String keyComment = getKeyComment(text);
+        String comments;
+        if (null == keyComment) {
+            comments = getComment() + TAIL;
+        } else {
+            comments = keyComment + TAIL;
+        }
         Comments cm = new Comments(ACCESS_TOKEN);
         try {
             cm.createComment(comments, weiboId);
@@ -146,24 +151,14 @@ public class HuDong {
             e.printStackTrace();
         }
     }
-    public static void commentWithoutTail(String weiboId, String token, String commentType) {
-        String comments = getComment(commentType);
-        Comments cm = new Comments(token);
-        try {
-            cm.createComment(comments, weiboId);
-            System.out.println(comments);
-        } catch (WeiboException e) {
-            e.printStackTrace();
-        }
-    }
 
     public static void printWeibo(int count, Status status) {
         System.out.println("【" + count + "】[" + status.getId() + "]" + status.getUser().getScreenName() + ":" + status.getText());
     }
 
     public static void main(String[] args) throws WeiboException, InterruptedException {
-//        commentForFollowWeibo();
-        comments();
+        commentForFollowWeibo();
+
 //        tokenList.add("2.00L4pldCqwBsbD4399cde4cfRhl69B");//解释
 //        tokenList.add("2.00VaIcVIqwBsbDe84a28d90cfTOMcD");//机器人
 //        tokenList.add("2.00uZfLmDqwBsbD7fd5c6d637BCroOC");//奶茶

@@ -10,7 +10,8 @@ public class GetUserTimeline {
 
 	public static void main(String[] args) {
 		String access_token = WeiboConfig.getValue("access_token");
-		String uid = "1748405443";//素素
+		String uid = "7796218551";//机器人
+//		String uid = "2419941665";//解释
 		Timeline tm = new Timeline(access_token);
 		try {
 			StatusWapper status = tm.getUserTimelineByUid(uid);

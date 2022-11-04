@@ -87,12 +87,12 @@ public class Comment {
 
     public static void main(String[] args) throws WeiboException, InterruptedException {
 //        commentForFollowWeibo();
-        comments();
+//        comments();
 //        tokenList.add("2.00L4pldCqwBsbD4399cde4cfRhl69B");//解释
 //        tokenList.add("2.00VaIcVIqwBsbDe84a28d90cfTOMcD");//机器人
 //        tokenList.add("2.00uZfLmDqwBsbD7fd5c6d637BCroOC");//奶茶
 //        tokenList.add("2.002n_ooBqwBsbD0fe55780b5p_ixJD");//恋爱
-//        commentWithoutTail("4828110900170443", "2.00L4pldCqwBsbD4399cde4cfRhl69B", CommentBank.TYPE_CAI_HONG);
+        commentWithoutTail("4828110900170443", "2.00L4pldCqwBsbD4399cde4cfRhl69B", CommentBank.TYPE_CAI_HONG);
 //        commentWithoutTail("4828110900170443", "2.00uZfLmDqwBsbD7fd5c6d637BCroOC", CommentBank.TYPE_CAI_HONG);
 //        commentWithoutTail("4828110900170443", "2.00VaIcVIqwBsbDe84a28d90cfTOMcD", CommentBank.TYPE_CAI_HONG);
 //        commentWithoutTail("4828110900170443", "2.002n_ooBqwBsbD0fe55780b5p_ixJD", CommentBank.TYPE_CAI_HONG);

@@ -160,17 +160,17 @@ public class HuDong {
     }
 
     public static void main(String[] args) throws WeiboException, InterruptedException {
-        HttpClient httpClient = new HttpClient();
-        Response response = httpClient.post("https://api.weibo.com/2/attitudes/create.json",
-            new PostParameter[] {
-                    new PostParameter("source", "3308000132"),
-                    new PostParameter("attitude", "smile"),
-                    new PostParameter("id", "4833164541300052"),
-                    new PostParameter("access_token", ACCESS_TOKEN)
-            }, ACCESS_TOKEN);
-        System.out.println(response.asJSONObject());
+//        HttpClient httpClient = new HttpClient();
+//        Response response = httpClient.post("https://api.weibo.com/2/attitudes/create.json",
+//            new PostParameter[] {
+//                    new PostParameter("source", "3308000132"),
+//                    new PostParameter("attitude", "smile"),
+//                    new PostParameter("id", "4833164541300052"),
+//                    new PostParameter("access_token", ACCESS_TOKEN)
+//            }, ACCESS_TOKEN);
+//        System.out.println(response.asJSONObject());
 
-//        commentForFollowWeibo();
+        commentForFollowWeibo();
 
 //        tokenList.add("2.00L4pldCqwBsbD4399cde4cfRhl69B");//解释
 //        tokenList.add("2.00VaIcVIqwBsbDe84a28d90cfTOMcD");//机器人

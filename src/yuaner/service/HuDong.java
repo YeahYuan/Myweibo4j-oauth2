@@ -46,8 +46,8 @@ public class HuDong {
                     limitWeiboId = maxWeiboId;
                     break;
                 }
-                if (status.getUser().getId().equals("2461615292")) {
-                    //发电站
+                if (status.getUser().getId().equals("2461615292") || status.getUser().getId().equals("1945451557")) {
+                    //发电站和球球
                     continue;
                 }
                 printWeibo(count, status);
@@ -72,7 +72,7 @@ public class HuDong {
                     count++;
                 }
             }
-            Thread.sleep(1000 * 60 * 5);
+//            Thread.sleep(1000 * 60 * 5);
         }
 
     }

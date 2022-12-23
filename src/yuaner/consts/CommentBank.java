@@ -55,6 +55,8 @@ public class CommentBank {
          keyMap.put("视频", "剪辑");
          keyMap.put("上班", "上班");
          keyMap.put("下班", "下班");
+         keyMap.put("接机", "接送");
+         keyMap.put("送机", "接送");
          keyMap.put("壁纸", "壁纸");
          keyMap.put("汇总", "整理");
          keyMap.put("整理", "整理");
